@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">2. UserInputProject_CourtCounter</string>
+    <string name="textTeamA">Team A</string>
+    <string name="textTeamB">Team B</string>
+    <string name="resetText">RESET</string>
+    <string name="threePointText">+3 POINTS</string>
+    <string name="twoPointText">+2 POINTS</string>
+    <string name="onePointText">FREE THROW</string>
+</resources>
