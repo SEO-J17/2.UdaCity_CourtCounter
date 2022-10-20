@@ -2,67 +2,61 @@ package study.seo.a2userinputproject_courtcounter
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import study.seo.a2userinputproject_courtcounter.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity() {
     private var teamAScore = 0
     private var teamBScore = 0
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        findViewById<Button>(R.id.point1_Button).setOnClickListener(this)
-        findViewById<Button>(R.id.point2_Button).setOnClickListener(this)
-        findViewById<Button>(R.id.point3_Button).setOnClickListener(this)
-        findViewById<Button>(R.id.b_point1_Button).setOnClickListener(this)
-        findViewById<Button>(R.id.b_point2_Button).setOnClickListener(this)
-        findViewById<Button>(R.id.b_point3_Button).setOnClickListener(this)
-        findViewById<Button>(R.id.reset).setOnClickListener(this)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.point1Button.setOnClickListener {
+            displayForTeamA(++teamAScore);
+        }
+
+        binding.point2Button.setOnClickListener {
+            teamAScore += 2
+            displayForTeamA(teamAScore)
+        }
+
+        binding.point3Button.setOnClickListener {
+            teamAScore += 3
+            displayForTeamA(teamAScore)
+        }
+
+        binding.bPoint1Button.setOnClickListener {
+            displayForTeamB(++teamBScore)
+        }
+
+        binding.bPoint2Button.setOnClickListener {
+            teamBScore += 2
+            displayForTeamB(teamBScore)
+        }
+
+        binding.bPoint3Button.setOnClickListener {
+            teamBScore += 3
+            displayForTeamB(teamBScore)
+        }
+
+        binding.reset.setOnClickListener {
+            teamBScore = 0
+            teamAScore = 0
+            displayForTeamA(teamAScore)
+            displayForTeamB(teamBScore)
+        }
+
     }
 
     private fun displayForTeamA(num: Int) {
-        val scoreA = findViewById<TextView>(R.id.A_teamCount)
-        scoreA.text = num.toString()
+        binding.ATeamCount.text = num.toString()
     }
 
     private fun displayForTeamB(num: Int) {
-        val scoreB = findViewById<TextView>(R.id.B_teamCount)
-        //텍스트 추가
-        scoreB.text = num.toString()
+        binding.BTeamCount.text = num.toString()
     }
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.point1_Button -> {
-                displayForTeamA(++teamAScore);
-            }
-            R.id.point2_Button -> {
-                teamAScore += 2
-                displayForTeamA(teamAScore)
-            }
-            R.id.point3_Button -> {
-                teamAScore += 3
-                displayForTeamA(teamAScore)
-            }
-            R.id.b_point1_Button -> {
-                displayForTeamB(++teamBScore)
-            }
-            R.id.b_point2_Button -> {
-                teamBScore += 2
-                displayForTeamB(teamBScore)
-            }
-            R.id.b_point3_Button -> {
-                teamBScore += 3
-                displayForTeamB(teamBScore)
-            }
-            R.id.reset -> {
-                teamBScore = 0
-                teamAScore = 0
-                displayForTeamA(teamAScore)
-                displayForTeamB(teamBScore)
-            }
-        }
-    }
 }
